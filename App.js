@@ -7,21 +7,18 @@
  */
 
 import React from 'react';
-import {
-  SafeAreaView,
-  ScrollView,
-  StatusBar,
-  StyleSheet,
-  Text,
-  useColorScheme,
-  View,
-} from 'react-native';
 import ScreenPage from './src/navigation/StackScreen';
+import {ApplicationProvider,IconRegistry} from '@ui-kitten/components';
+import * as eva from '@eva-design/eva';
+import {EvaIconsPack} from '@ui-kitten/eva-icons';
 
 const App = () => {
   return (
     <>
-      <ScreenPage />
+      <IconRegistry icons={EvaIconsPack} />
+      <ApplicationProvider {...eva} theme={eva.light}>
+        <ScreenPage />
+      </ApplicationProvider>
     </>
   );
 };
