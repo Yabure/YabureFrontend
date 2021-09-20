@@ -35,7 +35,7 @@ const styles = StyleSheet.create({
     borderWidth: 1,
   },
   buttonText: {
-    fontSize:  DeviceInfo.isTablet() ? 30 :15,
+    fontSize: DeviceInfo.isTablet() ? 30 : 15,
     fontWeight: '500',
     color: '#FFFFFF',
     fontFamily: 'Lato-Regular',

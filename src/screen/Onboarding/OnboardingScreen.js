@@ -1,10 +1,9 @@
 import React, {useEffect} from 'react';
-import {View, Text, Image, TouchableOpacity, StyleSheet} from 'react-native';
+import {View, Text, Image, StyleSheet} from 'react-native';
 import Onboarding from 'react-native-onboarding-swiper';
 import Orientation from 'react-native-orientation-locker';
 import {Button, Icon, Layout, Spinner} from '@ui-kitten/components';
 import FormButton from '../../component/FormButton';
-import {Icon as EvaIcon} from 'react-native-eva-icons';
 
 const OnboardingScreen = () => {
   React.useEffect(() => {

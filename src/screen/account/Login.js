@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useState} from 'react';
 import {
   View,
   Text,
@@ -14,6 +14,11 @@ import {
 import FormButton from '../../component/FormButton';
 import DeviceInfo from 'react-native-device-info';
 import Orientation from 'react-native-orientation-locker';
+import Validator from 'validatorjs';
+import en from 'validatorjs/src/lang/en';
+import {useDispatch} from 'react-redux';
+import {useSelector} from 'react-redux';
+import {loginAction} from '../../Redux/action/account';
 
 const useInputState = (initialValue = '') => {
   const [value, setValue] = React.useState(initialValue);
@@ -23,6 +28,43 @@ const useInputState = (initialValue = '') => {
 const AlertIcon = props => <Icon {...props} name="alert-circle-outline" />;
 
 const Login = () => {
+  const dispatch = useDispatch();
+  const state = useSelector(state => state.login);
+  console.log(state)
+
+  const [errors, setError] = useState({});
+  const [value, setValues] = useState({
+    email: '',
+    password: '',
+  });
+
+  Validator.setMessages('en', en);
+
+  const handleInputChange = (inputName, inputValue) => {
+    setValues({
+      ...value,
+      [inputName]: inputValue,
+    });
+  };
+
+  const onSubmit = () => {
+    let rules = {
+      email: 'required|email',
+      password: 'required',
+    };
+
+    let validation = new Validator(value, rules, {
+      'required.email': 'The Email field is required.',
+      'required.password': 'The Password field is required.',
+    });
+
+    if (validation.fails()) {
+      setError(validation.errors.all());
+    } else {
+      dispatch(loginAction(value));
+    }
+  };
+
   React.useEffect(() => {
     Orientation.lockToPortrait();
   }, []);
@@ -44,7 +86,7 @@ const Login = () => {
       <View style={styles.captionContainer}>
         {AlertIcon(styles.captionIcon)}
         <Text style={styles.captionText}>
-          Should contain at least 8 symbols
+          Should contain at least 6 symbols
         </Text>
       </View>
     );
@@ -62,7 +104,9 @@ const Login = () => {
             textStyle={styles.input}
             placeholder="Email"
             style={styles.boder}
-            {...smallInputState}
+            name="email"
+            onChangeText={value => handleInputChange('email', value)}
+            value={value.email}
           />
         </View>
 
@@ -75,12 +119,13 @@ const Login = () => {
             accessoryRight={renderIcon}
             secureTextEntry={secureTextEntry}
             style={styles.boder}
-            {...smallInputState}
+            onChangeText={value => handleInputChange('password', value)}
+            value={value.password}
           />
         </View>
       </View>
       <View style={styles.button}>
-        <FormButton buttonTitle="Sign In" />
+        <FormButton onSubmit={onSubmit} buttonTitle="Sign In" />
 
         <View style={styles.lastContainer}>
           <TouchableOpacity>
