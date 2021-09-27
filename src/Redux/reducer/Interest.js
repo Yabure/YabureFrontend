@@ -1,7 +1,7 @@
 import {GET_INTEREST, INTEREST_ERROR} from '../types';
 
 const initialState = {
-  profile: [],
+  interest: [],
   loading: true,
   error: null,
   msg: null,
@@ -13,7 +13,9 @@ export function interest(state = initialState, action) {
       return {
         ...state,
         loading: false,
-        ...action.payload,
+        interest: action.payload.data.map(data => {
+          return {...data, selected: false};
+        }),
       };
     case INTEREST_ERROR:
       return {

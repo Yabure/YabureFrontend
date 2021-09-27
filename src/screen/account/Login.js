@@ -20,6 +20,7 @@ import {useDispatch} from 'react-redux';
 import {useSelector} from 'react-redux';
 import {loginAction} from '../../Redux/action/account';
 
+
 const useInputState = (initialValue = '') => {
   const [value, setValue] = React.useState(initialValue);
   return {value, onChangeText: setValue};
@@ -29,8 +30,9 @@ const AlertIcon = props => <Icon {...props} name="alert-circle-outline" />;
 
 const Login = () => {
   const dispatch = useDispatch();
-  const state = useSelector(state => state.login);
-  console.log(state)
+  const login = useSelector(state => state.login);
+  // const {error} = login;
+  console.log(login.error);
 
   const [errors, setError] = useState({});
   const [value, setValues] = useState({
@@ -69,7 +71,6 @@ const Login = () => {
     Orientation.lockToPortrait();
   }, []);
 
-  const smallInputState = useInputState();
   const [secureTextEntry, setSecureTextEntry] = React.useState(true);
 
   const toggleSecureEntry = () => {
@@ -81,13 +82,21 @@ const Login = () => {
       <Icon {...props} name={secureTextEntry ? 'eye-off' : 'eye'} />
     </TouchableWithoutFeedback>
   );
-  const renderCaption = () => {
+
+  const renderCaptionEmail = () => {
     return (
       <View style={styles.captionContainer}>
         {AlertIcon(styles.captionIcon)}
-        <Text style={styles.captionText}>
-          Should contain at least 6 symbols
-        </Text>
+        <Text style={styles.captionText}>{errors.email}</Text>
+      </View>
+    );
+  };
+
+  const renderCaptionPassword = () => {
+    return (
+      <View style={styles.captionContainer}>
+        {AlertIcon(styles.captionIcon)}
+        <Text style={styles.captionText}>{errors.password}</Text>
       </View>
     );
   };
@@ -98,6 +107,7 @@ const Login = () => {
         <Text style={styles.text}>SIGN IN</Text>
       </View>
       <View style={styles.inputContainer}>
+        <Text style={styles.error}>{login.error}</Text>
         <View>
           <Input
             size={DeviceInfo.isTablet() ? 'large' : 'medium'}
@@ -107,15 +117,16 @@ const Login = () => {
             name="email"
             onChangeText={value => handleInputChange('email', value)}
             value={value.email}
+            caption={renderCaptionEmail}
           />
         </View>
 
-        <View style={{top: 30}}>
+        <View style={{top: 20}}>
           <Input
             size={DeviceInfo.isTablet() ? 'large' : 'medium'}
             textStyle={styles.inputTwo}
             placeholder="Password"
-            caption={renderCaption}
+            caption={renderCaptionPassword}
             accessoryRight={renderIcon}
             secureTextEntry={secureTextEntry}
             style={styles.boder}
@@ -189,7 +200,7 @@ const styles = StyleSheet.create({
     //   justifyContent:'space-between',
     width: '80%',
     justifyContent: 'center',
-    top: hp(33),
+    top: hp(20),
     alignSelf: 'center',
   },
 
@@ -216,5 +227,27 @@ const styles = StyleSheet.create({
   boder: {
     borderColor: 'black',
     borderWidth: 1,
+  },
+
+  captionContainer: {
+    display: 'flex',
+    flexDirection: 'row',
+    alignItems: 'center',
+  },
+  captionIcon: {
+    width: 10,
+    height: 10,
+    marginRight: 5,
+  },
+  captionText: {
+    fontSize: 12,
+    fontWeight: '400',
+    fontFamily: 'opensans-regular',
+    color: '#DB303C',
+  },
+  error: {
+    color: '#DB303C',
+    textAlign: 'center',
+    bottom:10
   },
 });

@@ -13,28 +13,30 @@ import VerifyHome from '../screen/Verify/VerifyHome';
 import VerifyOtp from '../screen/Verify/VerifyOtp';
 import {Icon} from '@ui-kitten/components';
 import Uploader from '../screen/Upload/Index';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 
 const Stack = createNativeStackNavigator();
+const hideOnboarding = AsyncStorage.getItem('first_time');
 
 function ScreenPage() {
   return (
     <NavigationContainer>
-      <Stack.Navigator>
-        {/* <Stack.Screen name="Onboarding" component={OnboardingScreen}  options={{ headerShown: false }}/> */}
-        {/* <Stack.Screen
-          name="Login"
-          component={Login}
-          options={{headerShown: false}}
-        /> */}
-        {/* <Stack.Screen
-          name="Register"
-          component={Register}
-          options={{
-            headerShown: false,
-          }}
-        /> */}
+      <Stack.Navigator initialRouteName="Interests">
+        {/* {hideOnboarding ? (
+          <Stack.Screen
+            name="Login"
+            component={Login}
+            options={{headerShown: false}}
+          />
+        ) : (
+          <Stack.Screen
+            name="Onboarding"
+            component={OnboardingScreen}
+            options={{headerShown: false}}
+          />
+        )} */}
 
-        {/* <Stack.Screen
+        <Stack.Screen
           name="Interests"
           component={Interest}
           options={{
@@ -59,6 +61,14 @@ function ScreenPage() {
                 />
               </View>
             ),
+          }}
+        />
+
+        {/* <Stack.Screen
+          name="Register"
+          component={Register}
+          options={{
+            headerShown: false,
           }}
         /> */}
 

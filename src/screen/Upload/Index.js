@@ -6,17 +6,19 @@ import FormInput from '../../component/FormInput';
 import Header from '../../component/Header';
 import {useSelector, useDispatch} from 'react-redux';
 import {GetuploadDocuments} from '../../Redux/action/uploadDocument';
+import {interest} from '../../Redux/action/Interest';
 
 const Uploader = () => {
   useEffect(() => {
     dispatch(GetuploadDocuments());
+    dispatch(interest());
   }, []);
 
-  const document = useSelector(state => state.Uploader);
-  console.log(document, 'document');
-  const dispatch = useDispatch();
+  const document = useSelector(state => state);
+  const interests = useSelector(state => state);
+  console.log(document, 'interest');
 
-  console.log(document);
+  const dispatch = useDispatch();
 
   return (
     <SafeAreaView style={{backgroundColor: '	#FFFFFF'}}>

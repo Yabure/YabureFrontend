@@ -4,8 +4,13 @@ import Onboarding from 'react-native-onboarding-swiper';
 import Orientation from 'react-native-orientation-locker';
 import {Button, Icon, Layout, Spinner} from '@ui-kitten/components';
 import FormButton from '../../component/FormButton';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 
-const OnboardingScreen = () => {
+const OnboardingScreen = props => {
+  const [loading, setLoading] = React.useState(true);
+
+  const {navigation} = props;
+
   React.useEffect(() => {
     Orientation.lockToPortrait();
   }, []);
@@ -26,7 +31,7 @@ const OnboardingScreen = () => {
     );
   };
 
-  const Next = props => (
+  const NextButton = props => (
     <View style={{width: 120, height: 60, marginRight: 10}}>
       <FormButton
         buttonText
@@ -40,17 +45,27 @@ const OnboardingScreen = () => {
     </View>
   );
 
-  const Done = props => (
+  const DoneButton = props => (
     <View style={{width: 120, height: 60, marginRight: 10}}>
       <FormButton buttonText buttonTitle="Start" color="#000000" {...props} />
     </View>
   );
 
+  const onDone = () => {
+    // After user finished the intro slides. Show real app through
+    // navigation or simply by controlling state
+    AsyncStorage.setItem('first_time', 'true').then(() => {
+      setLoading(false);
+      navigation.navigate('Login');
+    });
+  };
+
   return (
     <Onboarding
+      onDone={onDone}
       showSkip={false}
-      NextButtonComponent={Next}
-      DoneButtonComponent={Done}
+      NextButtonComponent={NextButton}
+      DoneButtonComponent={DoneButton}
       DotComponent={Dots}
       pages={[
         {

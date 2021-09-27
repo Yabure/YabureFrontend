@@ -1,8 +1,4 @@
-import {
-
-  UPLOAD_PDF_ERROR,
-  GET_UPLOAD_PDF,
-} from '../types';
+import {UPLOAD_PDF_ERROR, GET_UPLOAD_PDF} from '../types';
 
 const initialState = {
   pdf: [],

@@ -18,7 +18,7 @@ export function profile(state = initialState, action) {
         ...state,
         loading: false,
         msg: action.msg,
-        ...action.payload,
+        payload: action.payload,
       };
     case PROFILE_FAILURE:
       return {

@@ -9,9 +9,8 @@ import {
   LOGIN_LOADING,
   LOGIN_FAILURE,
 } from '../types';
-// import * as RootNavigation from '../../Navigations/RootNavigation';
-import { instance } from '../authToken';
-
+import * as RootNavigation from '../../navigation/RootNavigation';
+import {instance} from '../authToken';
 
 export const RegisterAction = payload => {
   return dispatch => {
@@ -40,6 +39,7 @@ export const RegisterAction = payload => {
           dispatch({
             type: REGISTER_FAILURE,
             payload: err,
+            
           });
         } else if (error.request) {
           dispatch({
@@ -85,7 +85,7 @@ export const loginAction = payload => {
     dispatch({
       type: LOGIN_LOADING,
     });
-   
+
     instance
       .post(
         'http://ec2-3-129-194-135.us-east-2.compute.amazonaws.com/v1/auth/login',
@@ -100,11 +100,11 @@ export const loginAction = payload => {
             payload: res.data,
             msg: 'Registration successful. Activation code has been sent to your email',
           });
-           RootNavigation.navigate('Profiles');
+          RootNavigation.navigate('Profiles');
         }
       })
       .catch(function (error) {
-        console.log(error);
+        // console.log(error);
         if (error.response) {
           const err = error.response.data.errors;
           dispatch({

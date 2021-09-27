@@ -9,9 +9,9 @@ import {Uploader} from '../Redux/reducer/uploadDocument';
 const reducer = combineReducers({
   // account,
   // VerifyOtp,
-   login,
+  login,
   // profile,
-  // interest,
+  interest,
   Uploader,
 });
 
