@@ -10,7 +10,6 @@ import {
 } from 'react-native';
 import {useSelector, useDispatch} from 'react-redux';
 import {interest} from '../../Redux/action/Interest';
-import DeviceInfo from 'react-native-device-info';
 import {windowHeight, windowWidth} from '../../utils/Dimension';
 import FormButton from '../../component/FormButton';
 
@@ -36,12 +35,8 @@ const Interest = () => {
 
   const selectItem = data => {
     data.selected = !data.selected;
-    data.selected ? 'green' : 'yellow';
-
     const index = interestData.findIndex(item => data.id === item);
-
     interestData[index] = data.item;
-
     setInterestField(interestData[index]);
   };
 
@@ -75,8 +70,8 @@ const Interest = () => {
           horizontal={false}
         />
       </View>
-      <View style={styles.button}>
-        <FormButton buttonTitle='Next' />
+      <View style={styles.buttonContainer}>
+        <FormButton buttonTitle="Next" />
       </View>
     </View>
   );
@@ -114,50 +109,12 @@ const styles = StyleSheet.create({
     marginVertical: 20,
     marginHorizontal: 16,
   },
-  title: {
-    textAlign: 'center',
+  buttonContainer: {
+    top: windowHeight / 2,
+    width: windowWidth / 1.4,
+    alignSelf: 'center',
+    right: 30,
   },
-  list: {
-    paddingVertical: 5,
-    margin: 3,
-    flexDirection: 'row',
-    backgroundColor: '#192338',
-    justifyContent: 'flex-start',
-    alignItems: 'center',
-    zIndex: -1,
-  },
-  lightText: {
-    color: '#f7f7f7',
-    width: 200,
-    paddingLeft: 15,
-    fontSize: 12,
-  },
-  line: {
-    height: 0.5,
-    width: '100%',
-    backgroundColor: 'rgba(255,255,255,0.5)',
-  },
-  icon: {
-    position: 'absolute',
-    bottom: 20,
-    width: '100%',
-    left: 290,
-    zIndex: 1,
-  },
-  numberBox: {
-    position: 'absolute',
-    bottom: 75,
-    width: 30,
-    height: 30,
-    borderRadius: 15,
-    left: 330,
-    zIndex: 3,
-    backgroundColor: '#e3e3e3',
-    justifyContent: 'center',
-    alignItems: 'center',
-  },
-  number: {fontSize: 14, color: '#000'},
-  selected: {backgroundColor: '#FA7B5F'},
 });
 
 export default Interest;
