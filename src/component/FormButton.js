@@ -3,9 +3,10 @@ import {View, Text, StyleSheet, TouchableOpacity} from 'react-native';
 import {windowHeight, windowWidth} from '../utils/Dimension';
 import DeviceInfo from 'react-native-device-info';
 
-const FormButton = ({buttonTitle, Icon, onSubmit, ...rest}) => {
+const FormButton = ({buttonTitle, Icon, disabled, onSubmit, ...rest}) => {
   return (
     <TouchableOpacity
+      disabled={disabled}
       style={styles.buttonContainer}
       onPress={onSubmit}
       {...rest}>

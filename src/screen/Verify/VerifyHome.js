@@ -6,7 +6,7 @@ import {windowWidth} from '../../utils/Dimension';
 import Orientation from 'react-native-orientation-locker';
 import DeviceInfo from 'react-native-device-info';
 
-const VerifyHome = () => {
+const VerifyHome = ({navigation}) => {
   React.useEffect(() => {
     Orientation.lockToPortrait();
   }, []);
@@ -24,7 +24,10 @@ const VerifyHome = () => {
       </View>
 
       <View style={styles.button}>
-        <FormButton buttonTitle="Verify" />
+        <FormButton
+          buttonTitle="Verify"
+          onSubmit={() => navigation.navigate('VerifyOtp')}
+        />
       </View>
 
       <View style={styles.buttonTwo}>
@@ -60,7 +63,7 @@ const styles = StyleSheet.create({
     alignSelf: 'center',
   },
   buttonTwo: {
-    top: DeviceInfo.isTablet()? 80: 50,
+    top: DeviceInfo.isTablet() ? 80 : 50,
     width: windowWidth / 1.2,
     alignSelf: 'center',
     left: 10,

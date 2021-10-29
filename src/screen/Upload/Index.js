@@ -17,7 +17,7 @@ const Uploader = () => {
   const document = useSelector(state => state);
   const interests = useSelector(state => state);
   console.log(document, 'interest');
-
+r
   const dispatch = useDispatch();
 
   return (

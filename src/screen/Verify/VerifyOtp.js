@@ -3,19 +3,22 @@ import {StyleSheet, Text, View} from 'react-native';
 import OTPInputView from '@twotalltotems/react-native-otp-input';
 import {useSelector} from 'react-redux';
 import {useDispatch} from 'react-redux';
-// import {VerifyToken} from '../Redux/action/account';
+import {VerifyToken} from '../../Redux/action/account';
 import FormButton from '../../component/FormButton';
+import FormButtonCustom from '../../component/FormCustomButton';
 
 const Otp = () => {
   const [code, setCode] = React.useState('');
   const state = useSelector(state => state.VerifyOtp);
-  
+  console.log(state)
+  const [disabled, setDisable] = React.useState(true);
+
   const dispatch = useDispatch();
 
   const onSubmit = () => {
-    // dispatch(VerifyToken(code));
-  
+    dispatch(VerifyToken(code));
   };
+
 
   return (
     <View style={styles.container}>
@@ -31,10 +34,18 @@ const Otp = () => {
           autoFocusOnLoad
           codeInputFieldStyle={styles.underlineStyleBase}
           codeInputHighlightStyle={styles.underlineStyleHighLighted}
-          onCodeFilled={() => onSubmit()}
+          onCodeFilled={() => setDisable(false)}
+          editable={true}
         />
       </View>
-      <FormButton buttonTitle="Done" />
+      <FormButtonCustom
+        disabled={disabled}
+        buttonTitle="Done"
+        bgColor={disabled ? '#cccccc' : '#302675'}
+        textColor={disabled ? 'black' : 'white'}
+        onSubmit={onSubmit}
+      />
+
       <View style={{flexDirection: 'row', width: '100%', top: 13}}>
         <Text style={{fontSize: 13, color: 'rgba(112, 108, 97, 0.9)'}}>
           Did you receive the email verification code?{' '}

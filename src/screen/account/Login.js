@@ -20,7 +20,6 @@ import {useDispatch} from 'react-redux';
 import {useSelector} from 'react-redux';
 import {loginAction} from '../../Redux/action/account';
 
-
 const useInputState = (initialValue = '') => {
   const [value, setValue] = React.useState(initialValue);
   return {value, onChangeText: setValue};
@@ -28,11 +27,10 @@ const useInputState = (initialValue = '') => {
 
 const AlertIcon = props => <Icon {...props} name="alert-circle-outline" />;
 
-const Login = () => {
+const Login = ({navigation}) => {
   const dispatch = useDispatch();
   const login = useSelector(state => state.login);
   // const {error} = login;
-  console.log(login.error);
 
   const [errors, setError] = useState({});
   const [value, setValues] = useState({
@@ -156,7 +154,7 @@ const Login = () => {
                 Don’t have an account?{' '}
               </Text>
             </View>
-            <TouchableOpacity>
+            <TouchableOpacity onPress={() => navigation.navigate('Register')}>
               <Text
                 style={{
                   color: '#302675',
@@ -248,6 +246,6 @@ const styles = StyleSheet.create({
   error: {
     color: '#DB303C',
     textAlign: 'center',
-    bottom:10
+    bottom: 10,
   },
 });

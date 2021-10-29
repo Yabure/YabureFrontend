@@ -21,7 +21,7 @@ const hideOnboarding = AsyncStorage.getItem('first_time');
 function ScreenPage() {
   return (
     <NavigationContainer>
-      <Stack.Navigator initialRouteName="Interests">
+      <Stack.Navigator initialRouteName="OnboardingScreen">
         {/* {hideOnboarding ? (
           <Stack.Screen
             name="Login"
@@ -35,6 +35,12 @@ function ScreenPage() {
             options={{headerShown: false}}
           />
         )} */}
+
+        <Stack.Screen
+          name="Onboarding"
+          component={OnboardingScreen}
+          options={{headerShown: false}}
+        />
 
         <Stack.Screen
           name="Interests"
@@ -64,25 +70,30 @@ function ScreenPage() {
           }}
         />
 
-        {/* <Stack.Screen
+        <Stack.Screen
           name="Register"
           component={Register}
           options={{
             headerShown: false,
           }}
-        /> */}
+        />
+        <Stack.Screen
+          name="Login"
+          component={Login}
+          options={{headerShown: false}}
+        />
 
-        {/* <Stack.Screen
+        <Stack.Screen
           name="VerifyHome"
           component={VerifyHome}
           options={{headerShown: false}}
-        /> */}
+        />
 
-        {/* <Stack.Screen
+        <Stack.Screen
           name="VerifyOtp"
           component={VerifyOtp}
           options={{headerShown: false}}
-        /> */}
+        />
 
         <Stack.Screen
           name="Uploader"

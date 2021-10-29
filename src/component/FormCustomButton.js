@@ -3,9 +3,18 @@ import {View, Text, StyleSheet, TouchableOpacity} from 'react-native';
 import {windowHeight, windowWidth} from '../utils/Dimension';
 import DeviceInfo from 'react-native-device-info';
 
-const FormButtonCustom = ({buttonTitle, bgColor, textColor, ...rest}) => {
+const FormButtonCustom = ({
+  buttonTitle,
+  disabled,
+  onSubmit,
+  bgColor,
+  textColor,
+  ...rest
+}) => {
   return (
     <TouchableOpacity
+      onPress={onSubmit}
+      disabled={disabled}
       style={[styles.buttonContainer, {backgroundColor: bgColor}]}
       {...rest}>
       <Text style={[styles.buttonText, {color: textColor}]}>{buttonTitle}</Text>

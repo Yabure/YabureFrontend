@@ -11,6 +11,7 @@ import {
 } from '../types';
 import * as RootNavigation from '../../navigation/RootNavigation';
 import {instance} from '../authToken';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 
 export const RegisterAction = payload => {
   return dispatch => {
@@ -30,7 +31,8 @@ export const RegisterAction = payload => {
             payload: res.data,
             msg: 'Registration successful. Activation code has been sent to your email',
           });
-          // RootNavigation.navigate('otp');
+          RootNavigation.navigate('VerifyHome');
+          // AsyncStorage.setItem('user', res.data)
         }
       })
       .catch(function (error) {
@@ -39,7 +41,6 @@ export const RegisterAction = payload => {
           dispatch({
             type: REGISTER_FAILURE,
             payload: err,
-            
           });
         } else if (error.request) {
           dispatch({
@@ -95,12 +96,14 @@ export const loginAction = payload => {
       .then(res => {
         console.log(res);
         if (res.status === 200) {
-          dispatch({
-            type: LOGIN_SUCCESS,
-            payload: res.data,
-            msg: 'Registration successful. Activation code has been sent to your email',
-          });
-          RootNavigation.navigate('Profiles');
+          dispatch(
+            {
+              type: LOGIN_SUCCESS,
+              payload: res.data,
+              msg: 'Registration successful. Activation code has been sent to your email',
+            },
+            RootNavigation.navigate('Register'),
+          );
         }
       })
       .catch(function (error) {

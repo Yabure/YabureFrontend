@@ -6,7 +6,7 @@ import {
   VERIFY_EMAIL_LOADING,
   VERIFY_EMAIL_SUCCESS,
   LOGIN_LOADING,
-  LOGIN_SUCCESS, 
+  LOGIN_SUCCESS,
   LOGIN_FAILURE,
 } from '../types';
 
@@ -17,7 +17,7 @@ const initialState = {
   msg: null,
 };
 
-export function account(state = initialState, action) {
+export function register(state = initialState, action) {
   switch (action.type) {
     case REGISTER_LOADING:
       return {
@@ -28,7 +28,7 @@ export function account(state = initialState, action) {
         ...state,
         loading: false,
         msg: action.msg,
-        ...action,
+        ...action.payload,
       };
     case REGISTER_FAILURE:
       return {
@@ -66,7 +66,6 @@ export function VerifyOtp(state = initialState, action) {
       return state;
   }
 }
-
 
 export function login(state = initialState, action) {
   switch (action.type) {

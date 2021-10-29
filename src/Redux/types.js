@@ -20,7 +20,7 @@ export const PROFILE_ERROR = 'PROFILE_ERROR';
 // INTERESTS
 export const GET_INTEREST = 'GET_INTEREST';
 export const UPDATE_INTEREST = 'UPDATE_INTEREST';
-export const INTEREST_ERROR = 'INTEREST_ERROR r';
+export const INTEREST_ERROR = 'INTEREST_ERROR';
 
 // upload Pdf
 export const GET_UPLOAD_PDF = 'GET_UPLOAD_PDF';
