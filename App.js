@@ -19,10 +19,10 @@ const App = () => {
   return (
     <Provider store={store}>
       {/* <PersistGate loading={null} persistor={persistor}> */}
-        <IconRegistry icons={EvaIconsPack} />
-        <ApplicationProvider {...eva} theme={eva.light}>
-          <ScreenPage />
-        </ApplicationProvider>
+      <IconRegistry icons={EvaIconsPack} />
+      <ApplicationProvider {...eva} theme={eva.light}>
+        <ScreenPage />
+      </ApplicationProvider>
       {/* </PersistGate> */}
     </Provider>
   );
